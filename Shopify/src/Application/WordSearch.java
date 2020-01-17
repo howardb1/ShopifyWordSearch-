@@ -1,8 +1,15 @@
 package Application;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WordSearch extends Application {
@@ -18,16 +25,36 @@ public class WordSearch extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		window = stage;
-		window.setTitle("the Wordy WordSearch");
+		stage.setScene(new Scene(creativeContent()));
+		stage.show();
 
-		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(10, 10, 10, 10));
+	}
 
-		grid.setVgap(8);
-		grid.setHgap(10);
+	private Parent creativeContent() {
+		Pane root = new Pane();
+		root.setPrefSize(600, 600);
 
-		window.show();
+		Tile tile = new Tile("A");
+
+		root.getChildren().add(tile);
+
+		return root;
+
+	}
+
+	private class Tile extends StackPane {
+		public Tile(String value) {
+			Rectangle border = new Rectangle(100, 100);
+			border.setFill(null);
+			border.setStroke(Color.BLACK);
+
+			Text text = new Text(value);
+			text.setFont(Font.font(30));
+
+			getChildren().addAll(border, text);
+			setAlignment(Pos.CENTER);
+
+		}
 
 	}
 
